@@ -1,0 +1,39 @@
+# Инструкции по настройке SSH на сервере
+
+## Вариант 1: Через SSH с паролем
+
+1. Подключитесь к серверу с помощью пароля:
+   ```
+   ssh root@37.252.20.136
+   ```
+
+2. После подключения выполните следующие команды:
+   ```
+   mkdir -p ~/.ssh
+   chmod 700 ~/.ssh
+   echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+eGheUX1vhyYNK9+dnbmS++cIrYfOkTvOKFkF9exFhwkxiBfCYo5ISJvPz7EnyADBfTUBwKhOEpnsSmlPcwLMTyRfnPsZVZkh6c9pAgLXK8mfLF7z8mJrfji8+mspln8e6f4qUyvQO0oABuiOK5EJzJeEiqgVvoDIQqlK0N1bikahl1QyN2XHQ7UMjz9vRh8brRYbkXHOjZU/YlLk3D5CfFjE1dU+65d0n6H1RD2W9A26raCqV8xsHmZZIBUeMMW+YSLZIPnrlwvDtrbp+8OX3UUuXiK64JCYdISFfcJoFF20atDflGqYCdORgM8tvx6gPVSSA4Gb3qZALKHK9WI4iVRSmJFIMxu2K6rr/irQhbH5opIS6tSypafsb2YDLc1Z6IFdrcgeVbNzaeXF4/XrvmenvYSYMfkgt+L7PxgVNLRhhM3aq6b5Nk9ck58FSV0Yyk2hHZciPWrBVFg1YQMt+eBw6+cZBs2M8WGSO/niuU7drkf6Ohp+SrFta49w81aRORJ9cOGHJKvXBuvjXtA39ns5kfcYgncP2BkT3iEjQ74LFzf1nDz545hdUNtIF9j/acpcTUZMvEE5FvmIGthJyRYQdMIIRhp2i3XODVZkb72O8m0LO6FQmmx/Ww4mEicHCjvTkYnSACHNbu0LfGJcTPO6SHUlULOENLFSUmA94Q== romanus1983' >> ~/.ssh/authorized_keys
+   chmod 600 ~/.ssh/authorized_keys
+   ```
+
+3. Проверьте, что ключ добавлен:
+   ```
+   cat ~/.ssh/authorized_keys
+   ```
+
+## Вариант 2: Через панель управления хостингом
+
+Если у вас есть панель управления хостингом (ISPmanager, cPanel, Plesk и т.д.), найдите раздел "SSH ключи" и добавьте следующий публичный ключ:
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+eGheUX1vhyYNK9+dnbmS++cIrYfOkTvOKFkF9exFhwkxiBfCYo5ISJvPz7EnyADBfTUBwKhOEpnsSmlPcwLMTyRfnPsZVZkh6c9pAgLXK8mfLF7z8mJrfji8+mspln8e6f4qUyvQO0oABuiOK5EJzJeEiqgVvoDIQqlK0N1bikahl1QyN2XHQ7UMjz9vRh8brRYbkXHOjZU/YlLk3D5CfFjE1dU+65d0n6H1RD2W9A26raCqV8xsHmZZIBUeMMW+YSLZIPnrlwvDtrbp+8OX3UUuXiK64JCYdISFfcJoFF20atDflGqYCdORgM8tvx6gPVSSA4Gb3qZALKHK9WI4iVRSmJFIMxu2K6rr/irQhbH5opIS6tSypafsb2YDLc1Z6IFdrcgeVbNzaeXF4/XrvmenvYSYMfkgt+L7PxgVNLRhhM3aq6b5Nk9ck58FSV0Yyk2hHZciPWrBVFg1YQMt+eBw6+cZBs2M8WGSO/niuU7drkf6Ohp+SrFta49w81aRORJ9cOGHJKvXBuvjXtA39ns5kfcYgncP2BkT3iEjQ74LFzf1nDz545hdUNtIF9j/acpcTUZMvEE5FvmIGthJyRYQdMIIRhp2i3XODVZkb72O8m0LO6FQmmx/Ww4mEicHCjvTkYnSACHNbu0LfGJcTPO6SHUlULOENLFSUmA94Q== romanus1983
+```
+
+## Также не забудьте указать правильный путь в секрете REMOTE_TARGET_DIR
+
+В секрете REMOTE_TARGET_DIR укажите полный путь к директории на сервере, где будет размещен ваш сайт.
+Обычно это что-то вроде:
+- /var/www/html
+- /home/user/public_html
+- /usr/share/nginx/html
+
+Вам нужно указать директорию, в которую у пользователя root есть права на запись. 

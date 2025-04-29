@@ -35,4 +35,14 @@ p {
     padding: 10px;
     background-color: #f8f9fa;
     border-radius: 5px;
+}
+
+.ssh-test {
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 5px;
+    border: 1px solid #c8e6c9;
 } 
