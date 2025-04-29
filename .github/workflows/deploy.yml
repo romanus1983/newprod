@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         
-      - name: Deploy to hosting via SSH
-        uses: appleboy/ssh-action@master
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ${{ secrets.REMOTE_TARGET_DIR }}
-            git pull origin main || (git clone https://github.com/romanus1983/newprod.git . && git checkout main) 
+          known_hosts: automatic
+          if_key_exists: replace
+          
+      - name: Deploy to hosting via SSH
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.REMOTE_TARGET_DIR }} && git pull origin main || (git clone https://github.com/romanus1983/newprod.git . && git checkout main)" 
