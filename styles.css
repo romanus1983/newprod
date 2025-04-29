@@ -26,4 +26,13 @@ h1 {
 
 p {
     margin-bottom: 10px;
+}
+
+.test-deploy {
+    color: #007bff;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
 } 
